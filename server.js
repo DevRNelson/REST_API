@@ -5,7 +5,24 @@ const express = require("express");
 
 const app = express();
 
-//variable ^
+//REQUIRED APP ROUTES   (request,response)
+app.get("/products",(req,res)=>{
+
+
+
+})
+
+app.post("/products",(req,res)=>{
+    
+})
+
+app.put("/products",(req,res)=>{
+
+})
+
+app.delete("/products",(req,res)=>{
+
+})
 
 //create webserver that will listen to a specific port
 
