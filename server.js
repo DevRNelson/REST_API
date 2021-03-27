@@ -32,53 +32,7 @@ const fakeDB = [
 
 
 ]
-
-//import Express and asign it to a variable
-const express = require("express");
-
-
-//create an Express Application  OBject (THIS IS THE BOSS! CEO!!! )
-const app = express();
-
-
-app.get("/products", (req, res) => {
-
-    res.json({
-        message: "A list of all products",
-        data : fakeDB,
-        total : fakeDB.length,
-    })
-
-})
-
-app.get("/products/1", (req, res) => {
-
-})
-
-app.post("/products", (req, res) => {
-
-})
-
-app.put("/products/1", (req, res) => {
-
-})
-
-app.delete("/products/1", (req, res) => {
-
-})
-
-
-//CREATE A WEBSERVER THAT LISTENS ON A SPECIFIC PORT
-
-const PORT = 3000;
-
-app.listen(PORT, () => {
-
-    console.log(`The server is up and running on PORT ${PORT}`);
-});
-
-
-
+ 
 const express = require("express");
 
 
@@ -93,7 +47,7 @@ app.get("/products", (req, res) => {
 
 })
 
-app.post("/products/1", (req, res) => {
+app.post("/products/:id", (req, res) => {
 
 })
 
