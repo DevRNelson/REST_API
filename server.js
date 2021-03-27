@@ -13,4 +13,8 @@ const PORT = 3000;
 
 app.listen(PORT, ()=>{
 
-    con
+    console.log(`The server is up and running on PORT ${PORT} properly`)
+
+});
+
+
