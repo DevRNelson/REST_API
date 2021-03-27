@@ -1,34 +1,34 @@
 const fakeDB = [
     {
-        id: "1"
+        id: 1,
         title: "Samsung S21",
         description: "Samsung's latest smart phone",
         price: 1000,
         imgPath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbzsj3VzeaKURJvJv0n63pxKbUiSXXJv_E3i3bMWUODps2LkGAzRoj5-NXTSR-pgXORNrqXPg&usqp=CAc"
     },
     {
-        id: "2"
+        id: 2,
         title: "Samsung A52 G",
         description: "Feast your eyes on vibrant details with the FHD+ Super AMOLED display, reaching 800 nits¹ for clarity even in bright daylight. Eye Comfort Shield² lowers blue light, and Super Smooth keeps the view smooth, whether you're gaming or scrolling. All on the expansive 6.5-inch Infinity-O Display.",
         price: 450,
         imgPath: "https://images.samsung.com/is/image/samsung/p6pim/ca/galaxy-a52/feature/ca-feature-galaxy-a52-5g-a526-403831489?$FB_TYPE_A_JPG$"
     },
     {
-        id: "3"
+        id: 3,
         title: "Samsung A71",
         description: `The Galaxy A71 6.7" Infinity-O Display with Super AMOLED Plus colour technology delivers real-to-life colour in everything you watch and do—from gaming and posting, to streaming and multi-tasking. Start enjoying more of what you love, without the screen getting in your way.`,
         price: 524,
         imgPath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbzsj3VzeaKURJvJv0n63pxKbUiSXXJv_E3i3bMWUODps2LkGAzRoj5-NXTSR-pgXORNrqXPg&usqp=CAc"
     },
     {
-        id: "4"
+        id: 4,
         title: "Samsung A21",
         description: `The Samsung Galaxy A21 provides you with the smartphone essentials you need, in a new affordable Galaxy device. Take beautifully crisp photos and videos with our powerful quad lens camera. Enjoy cinematic clarity on our 6.5" edge-to-edge display.1 Keep going with a long-lasting battery2 that keeps going with you throughout the day.`,
         price: 300,
         imgPath: "https://images.samsung.com/is/image/samsung/ca-feature-galaxy-a21-278967928?$FB_TYPE_A_PNG$"
     },
     {
-        id: "5"
+        id: 5,
         title: "Samsung A11",
         description: `The Samsung Galaxy A11 provides you with the smartphone essentials you need, in a new affordable Galaxy device. Take crisp, clear photos and videos with our powerful triple lens camera. Enjoy cinematic clarity on our 6.4" edge-to-edge display.1 Keep going with a long-lasting battery2 that keeps going with you throughout the day.`,
         price: 150,
@@ -37,7 +37,7 @@ const fakeDB = [
 
 
 ]
- 
+
 const express = require("express");
 
 
@@ -45,28 +45,68 @@ const express = require("express");
 
 const app = express();
 
+app.use(express.json());
+
 //REQUIRED APP ROUTES   (request,response)
 app.get("/products", (req, res) => {
 
-
-
-})
-
-    //id creates a dynamic route meaning 
-    //you don't need to assign code to
-    //each page manually.
-    //cat is just like ID but for Categories
-app.post("/products/:id/:cat", (req, res) => {
+    let foundProduct = null;
+    //find filter for each req
+    const productID = req.params.id;
 
     console.log(req.params.id)
-    // ^ requests the needed ID
+
+    for (let i = 0; i < fakeDB.length; i++) {
+        if (productID === fakeDB[i].id) {
+            foundProduct = fakeDB[i];
+
+            break;
+        }
+    }
+
+    if (foundProduct === null) {
+
+        res.status(404).json({
+            message: `error 404 that page does not exist`,
+
+        })
+
+    }
+
+    else {
+
+        res.json({
+            message: `Product with ID Found ${foundProduct.id}`,
+            data: foundProduct
+        });
+
+    }
 })
 
-app.put("/products/1", (req, res) => {
+//id creates a dynamic route meaning 
+//you don't need to assign code to
+//each page manually.
+//multiple paramters and filters can be used is just like ID but for Categories
+app.post("/products/", (req, res) => {
+   /*   */
+    fakeDB.push(req.body);
+    res.json({
+        message:"The product was added successfully",
+        data:req.body
+    })
+    
+})
+// ^ requests the needed ID
+
+app.put("/products/:id/:cat", (req, res) => {
 
 })
 
-app.delete("/products/1", (req, res) => {
+
+
+app.delete("/products/:id/:cat", (req, res) => {
+
+    console.log(req.params.id)
 
 })
 
@@ -79,5 +119,4 @@ app.listen(PORT, () => {
     console.log(`The server is up and running on PORT ${PORT} properly`)
 
 });
-
 
