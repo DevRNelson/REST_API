@@ -1,29 +1,34 @@
 const fakeDB = [
     {
+        id: "1"
         title: "Samsung S21",
         description: "Samsung's latest smart phone",
         price: 1000,
         imgPath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbzsj3VzeaKURJvJv0n63pxKbUiSXXJv_E3i3bMWUODps2LkGAzRoj5-NXTSR-pgXORNrqXPg&usqp=CAc"
     },
     {
+        id: "2"
         title: "Samsung A52 G",
         description: "Feast your eyes on vibrant details with the FHD+ Super AMOLED display, reaching 800 nits¹ for clarity even in bright daylight. Eye Comfort Shield² lowers blue light, and Super Smooth keeps the view smooth, whether you're gaming or scrolling. All on the expansive 6.5-inch Infinity-O Display.",
         price: 450,
         imgPath: "https://images.samsung.com/is/image/samsung/p6pim/ca/galaxy-a52/feature/ca-feature-galaxy-a52-5g-a526-403831489?$FB_TYPE_A_JPG$"
     },
     {
+        id: "3"
         title: "Samsung A71",
         description: `The Galaxy A71 6.7" Infinity-O Display with Super AMOLED Plus colour technology delivers real-to-life colour in everything you watch and do—from gaming and posting, to streaming and multi-tasking. Start enjoying more of what you love, without the screen getting in your way.`,
         price: 524,
         imgPath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbzsj3VzeaKURJvJv0n63pxKbUiSXXJv_E3i3bMWUODps2LkGAzRoj5-NXTSR-pgXORNrqXPg&usqp=CAc"
     },
     {
+        id: "4"
         title: "Samsung A21",
         description: `The Samsung Galaxy A21 provides you with the smartphone essentials you need, in a new affordable Galaxy device. Take beautifully crisp photos and videos with our powerful quad lens camera. Enjoy cinematic clarity on our 6.5" edge-to-edge display.1 Keep going with a long-lasting battery2 that keeps going with you throughout the day.`,
         price: 300,
         imgPath: "https://images.samsung.com/is/image/samsung/ca-feature-galaxy-a21-278967928?$FB_TYPE_A_PNG$"
     },
     {
+        id: "5"
         title: "Samsung A11",
         description: `The Samsung Galaxy A11 provides you with the smartphone essentials you need, in a new affordable Galaxy device. Take crisp, clear photos and videos with our powerful triple lens camera. Enjoy cinematic clarity on our 6.4" edge-to-edge display.1 Keep going with a long-lasting battery2 that keeps going with you throughout the day.`,
         price: 150,
@@ -47,8 +52,14 @@ app.get("/products", (req, res) => {
 
 })
 
-app.post("/products/:id", (req, res) => {
+    //id creates a dynamic route meaning 
+    //you don't need to assign code to
+    //each page manually.
+    //cat is just like ID but for Categories
+app.post("/products/:id/:cat", (req, res) => {
 
+    console.log(req.params.id)
+    // ^ requests the needed ID
 })
 
 app.put("/products/1", (req, res) => {
