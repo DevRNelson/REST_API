@@ -108,11 +108,11 @@ app.get("/products/:id", (req,res)=>{
 
 app.post("/products",(req,res)=>{
 
-     fakeDB.push(req.body);
-     res.json({
-         message :"The product was successfully added to the Database",
-         data:req.body
-     })
+    fakeDB.push(req.body);
+    res.json({
+        message :"The product was successfully added to the Database",
+        data:req.body
+    })
 
 
 })
