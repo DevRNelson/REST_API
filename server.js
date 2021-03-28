@@ -48,67 +48,86 @@ const app = express();
 app.use(express.json());
 
 //REQUIRED APP ROUTES   (request,response)
-app.get("/products", (req, res) => {
 
-    let foundProduct = null;
-    //find filter for each req
-    const productID = req.params.id;
 
-    console.log(req.params.id)
-
-    for (let i = 0; i < fakeDB.length; i++) {
-        if (productID === fakeDB[i].id) {
-            foundProduct = fakeDB[i];
-
-            break;
-        }
-    }
-
-    if (foundProduct === null) {
-
-        res.status(404).json({
-            message: `error 404 that page does not exist`,
-
-        })
-
-    }
-
-    else {
-
-        res.json({
-            message: `Product with ID Found ${foundProduct.id}`,
-            data: foundProduct
-        });
-
-    }
+app.get("/products",(req,res)=>{
+    
+    res.json({
+        message: "A list of all products",
+        data : fakeDB,
+        total: fakeDB.length
+        
+    });
+    
 })
 
+//localhost:3000/products/boowho
 //id creates a dynamic route meaning 
 //you don't need to assign code to
 //each page manually.
 //multiple paramters and filters can be used is just like ID but for Categories
-app.post("/products/", (req, res) => {
-   /*   */
-    fakeDB.push(req.body);
-    res.json({
-        message:"The product was added successfully",
-        data:req.body
-    })
+app.get("/products/:id", (req,res)=>{
+     
+    
+    let foundProduct=null;
+  
+    const productID = parseInt(req.params.id);
+
+    for(let i=0; i<fakeDB.length; i++)
+    {
+
+        if(productID == fakeDB[i].id)
+        {
+            console.log()
+                                   
+            foundProduct = fakeDB[i]; ///WHat does this line do?
+            
+            break;
+        }
+
+    }
+
+    if(foundProduct === null)
+    {
+        res.status(404).json({
+            message: `No product was found with the ID ${productID}`
+        })
+    }
+
+    else
+    {
+        //success attempt
+        res.json({
+            message:   `Product with ID ${foundProduct.id}`,
+            data : foundProduct
+        });
+    }
+
+ 
+})
+
+app.post("/products",(req,res)=>{
+
+     fakeDB.push(req.body);
+     res.json({
+         message :"The product was successfully added to the Database",
+         data:req.body
+     })
+
+
+})
+
+app.put("/products/1",(req,res)=>{
     
 })
-// ^ requests the needed ID
 
-app.put("/products/:id/:cat", (req, res) => {
-
+app.delete("/products/1",(req,res)=>{
+    
 })
 
 
+//CREATE A WEBSERVER THAT LISTENS ON A SPECIFIC PORT
 
-app.delete("/products/:id/:cat", (req, res) => {
-
-    console.log(req.params.id)
-
-})
 
 //create webserver that will listen to a specific port
 
